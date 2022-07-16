@@ -74,3 +74,6 @@ rsconnect/
 /*_files/
 
 /coursework.RData
+
+*.csv
+*.xlsx
