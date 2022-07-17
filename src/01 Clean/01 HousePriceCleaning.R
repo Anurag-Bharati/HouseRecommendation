@@ -18,7 +18,7 @@ HousePrices = house_price_2021 %>%
   set_names(c("Price", "Date","Postcode", "Town", "District", "County")) %>%
   filter(County %in% c("GREATER MANCHESTER", "MERSEYSIDE")) %>% 
   mutate(PostcodePrefix = str_split(Postcode," ",2,TRUE)[,1]) %>% 
-  filter(PostcodePrefix %in% ReleventPCD$`Postal District Code`) %>%
+  filter(PostcodePrefix %in% RelevantPCD$`Postal District Code`) %>%
   mutate(County = as.factor(County),
          District = as.factor(str_to_title(District)),
          Town=as.factor(str_to_title(Town)), 
