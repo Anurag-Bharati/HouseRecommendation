@@ -14,3 +14,13 @@ RelevantPCD = ManchesterPCD %>%
   add_row(MerseysidePCD%>%mutate(County="MERSEYSIDE")) %>%
   mutate(County = as.factor(County), District = as.factor(District))
 rm(ManchesterPCD, MerseysidePCD)
+
+# &`In Use?`=="Yes"
+# https://www.doogal.co.uk/PostcodeCsvFields
+MasterGeoCode = read_csv("./data/raw/NorthWestPostcodes.csv", show_col_types = F) %>%
+  filter(County %in% c("Greater Manchester", "Merseyside")) %>%
+  select(Postcode, County, District, Ward,`District Code`,`Ward Code`,
+         `Lower layer super output area`,`LSOA Code`, `MSOA Code`,
+         Population,`Nearest station`,`Distance to station`,
+         `Postcode area`,`Postcode district`,`Average Income`,
+         `Travel To Work Area`,`Distance to sea`)
