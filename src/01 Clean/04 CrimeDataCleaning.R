@@ -30,17 +30,20 @@ Crime = crime_merseyside %>%
   select(Date = Month, Department = `Falls within`, LSOA=`LSOA code`, Type=`Crime type` ) %>%
   mutate(Date=ym(Date), Type=as_factor(Type)) %>% ungroup
 
-crime.type <- Crime %>%
-  group_by(Type) %>%
-  summarise(n = n()) %>%
-  select(Type, count=n)
+CrimeTypeCount = Crime %>%
+  group_by(LSOA,Date) %>%
+  pivot_wider(names_from = Type, values_from = Type, values_fn = length, values_fill = 0) %>%
+  summarise_at(.vars = colnames(.[,4:17]), .funs = sum) %>%  left_join(MinGeoCode, by="LSOA") %>%
+  select(PCD, LSOA, LLSOA, Date,County, District,Ward, everything()) %>%  distinct() %>% ungroup()
 
-# TODO crime
+CountBeforeOmit <- sum(CrimeTypeCount[,8:(ncol(CrimeTypeCount))])
+CrimeTypeCount <- CrimeTypeCount %>% na.omit
 
-Crime %>%
-  select(Type) %>%
-  mutate(Type = factor(Type)) %>%
-  ggplot(.,aes(y=type, fill=type)) + geom_bar() + coord_flip()
+# Verify: To prove that the crime count is equally distributed across its type
+CountBeforeOmit == nrow(Crime)
+
+# Output : True
+# A -> 561731 (ideal)
 
 naCols(Crime)
 # Outcome: Max missing values per variable percentage is 0%
@@ -50,6 +53,7 @@ naRows(Crime)
 # Action:  No action needed
 
 write_csv(Crime, "./data/clean/CleanCrime.csv")
+write_csv(CrimeTypeCount, "./data/clean/CleanCrimeType.csv")
 
 # REMOVE TEMP ----
 
