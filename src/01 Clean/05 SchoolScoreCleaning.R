@@ -95,5 +95,9 @@ write_csv(School, "./data/clean/CleanSchool.csv")
 
 
 # REMOVE TEMP ----
+rm(ks4Performance16,ks4Performance17, ks4Performance18, ks4Performance19)
+rm(KS4Performance16,KS4Performance17, KS4Performance18, KS4Performance19)
+rm(schoolInfo19, schoolInfo18, schoolInfo17, schoolInfo16)
+rm(SchInfo19, SchInfo18, SchInfo17, SchInfo16)
 if (exists("Region")) {rm(Region, envir=.GlobalEnv)}
 if (exists("SchInfo")) {rm(SchInfo, envir=.GlobalEnv)}
