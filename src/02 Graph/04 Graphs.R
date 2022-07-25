@@ -212,10 +212,34 @@ CrimeTypeCount %>% filter(Ward %in% c("Prescot North","Prescot South","Wallasey"
   scale_color_viridis_d(begin = 0.4,end=1, option = "magma") +
   myTheme
 
+CrimeTypeCount %>% select(Robbery, District) %>%
+  filter(District %in% c("Manchester", "Liverpool", "Wirral","Sefton", "" )) %>%
+  group_by(District) %>%
+  summarise(Percentage = sum(Robbery, na.rm=T)/sum(.$Robbery, na.rm = T), count=sum(Robbery)) %>%
+  arrange(Percentage) %>% ggplot(mapping = aes(x="", y=Percentage, fill=District)) +
+  geom_col() + coord_polar("y", start=0, clip="off") +
+  geom_text(aes(label=paste0(round(Percentage*100), "%", " (", count, ") cases")),position = position_stack(vjust = 0.5))+
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Robbery in 2019-2022(mid)",
+       subtitle = "in Manchester, Liverpool, Wirral, Sefton and St. Helens \n *100% = 3522 cases") +
+  scale_fill_viridis_d(begin =0.2,end=0.5,option = "A") +
+  myTheme
+
+CrimeTypeCount %>% mutate(Date=year(Date)) %>%  filter(Date == 2021) %>% select(Robbery,District) %>%
+  group_by(District) %>%
+  summarise(Percentage = sum(Robbery, na.rm=T)/sum(.$Robbery, na.rm = T), count=sum(Robbery)) %>% filter(Percentage>0) %>%
+  arrange(Percentage) %>% ggplot(mapping = aes(x="", y=Percentage, fill=District)) +
+  geom_col() + coord_polar("y", start=0, clip="off") +
+  geom_text(aes(label=paste0(round(Percentage*100), "%", " (", count, ") cases")),position = position_stack(vjust = 0.5))+
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Robbery in 2021 by District",
+       subtitle = "*100% = 1212 cases") +
+  scale_fill_viridis_d(begin =0.2,end=0.5,option = "A") +
+  myTheme
+
 # SCHOOL ----
 
 # BOX PLOT
-
 School %>% filter(TOWN %in% "Manchester") %>%
   group_by(Year, SCHNAME,TOWN) %>%
   summarise(Score = mean(Score)) %>%
@@ -241,7 +265,6 @@ School %>% filter(TOWN %in% "Liverpool") %>%
   myTheme
 
 # LINE GRAPH
-
 School %>%
   group_by(Year,District, County) %>%
   summarise(Score = mean(Score)) %>%
@@ -265,3 +288,5 @@ School %>% filter(District %in% c("Liverpool", "Manchester")) %>%
        subtitle = "from 2016 to 2019") +
   scale_color_viridis_d(begin = 0.3,end=0.7, option = "turbo") +
   myTheme
+
+# TODO Radar chart
