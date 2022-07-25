@@ -168,3 +168,57 @@ Crime %>% filter(Type=="Drugs" ) %>%
        subtitle = "in Greater Manchester & Merseyside") +
   scale_fill_viridis_d(begin = 0.5,end=0.8, option = "A") +
   myTheme
+
+# SCHOOL ----
+
+# BOX PLOT
+
+School %>% filter(TOWN %in% "Manchester") %>%
+  group_by(Year, SCHNAME,TOWN) %>%
+  summarise(Score = mean(Score)) %>%
+  ggplot(mapping=aes(y=SCHNAME, x=Score, fill=SCHNAME)) +
+  geom_boxplot(outlier.colour = "#fa7a43", show.legend = F) +
+  scale_x_continuous(breaks = seq(0,100,10))+
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Box plot of Average School Score in Manchester",
+       subtitle = "from year 2016 - 2019") +
+  scale_color_viridis_d(begin = 0.4,end=0.6, option = "turbo") +
+  myTheme
+
+School %>% filter(TOWN %in% "Liverpool") %>%
+  group_by(Year, SCHNAME,TOWN) %>%
+  summarise(Score = mean(Score)) %>% ungroup() %>%
+  ggplot(mapping=aes(y=SCHNAME, x=Score, fill=SCHNAME)) +
+  geom_boxplot(outlier.colour = "#fa7a43", show.legend = F) +
+  scale_x_continuous(breaks = seq(0,100,10))+
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Box plot of Average School Score in Liverpool",
+       subtitle = "from year 2016 - 2019") +
+  scale_color_viridis_d(begin = 0.4,end=0.6, option = "turbo") +
+  myTheme
+
+# LINE GRAPH
+
+School %>%
+  group_by(Year,District, County) %>%
+  summarise(Score = mean(Score)) %>%
+  ggplot(mapping = aes(x=Year, y=Score, color=County)) + facet_wrap(~District, nrow=3)+
+  geom_line(size=1, alpha=0.8, arrow=arrow(type = "closed",length = unit(0.2, "cm")),lineend = "round") +
+  dark_mode(theme_fivethirtyeight()) +
+  scale_y_continuous()+
+  labs(title="Mean Attainment 8 Score vs Year by District",
+       subtitle = "from 2016 to 2019") +
+  scale_color_viridis_d(begin = 0.3,end=0.7, option = "turbo") +
+  myTheme
+
+School %>% filter(District %in% c("Liverpool", "Manchester")) %>%
+  group_by(Year,TOWN) %>%
+  summarise(Score = mean(Score)) %>%
+  ggplot(mapping = aes(x=Year, y=Score, color=TOWN)) + facet_wrap(~TOWN, nrow=1)+
+  geom_line(size=1, alpha=0.8, arrow=arrow(type = "closed",length = unit(0.2, "cm")),lineend = "round") +
+  dark_mode(theme_fivethirtyeight()) +
+  scale_y_continuous()+
+  labs(title="Mean Acedemic Attainment Score vs Year",
+       subtitle = "from 2016 to 2019") +
+  scale_color_viridis_d(begin = 0.3,end=0.7, option = "turbo") +
+  myTheme
