@@ -99,3 +99,72 @@ HousePrices %>% filter(!County=="MERSEYSIDE") %>%
   scale_fill_viridis_d(begin = 0.4,end=1, option = "A") +
   myTheme
 
+# BANDWIDTH ----
+
+Bandwidth %>%
+  select(Postcode, AvgDownload, AvgUpload) %>%
+  inner_join(HousePrices, by="Postcode") %>%
+  filter(County=="MERSEYSIDE") %>%
+  group_by(District, Town) %>%
+  summarise(Mean = mean(AvgDownload, na.rm=T)) %>%
+  ggplot(aes(x = District,  y = Mean)) +
+  geom_bar(stat = "identity", aes(fill = Town)) +
+  scale_y_continuous(labels = function(x) scales::comma(x, suffix = ' Mbps')) +
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Average download speed by district",
+       subtitle = "in the Merseyside",
+       caption = "Mbps: Megabits per second") +
+  scale_fill_viridis_d(begin = 0.4,end=1, option = "D") +
+  myTheme
+
+Bandwidth %>%
+  select(Postcode, AvgDownload, AvgUpload) %>%
+  inner_join(HousePrices, by="Postcode") %>%
+  filter(!County=="MERSEYSIDE") %>%
+  group_by(District, Town) %>%
+  summarise(Mean = mean(AvgDownload, na.rm=T)) %>%
+  ggplot(aes(x = District,  y = Mean)) +
+  geom_bar(stat = "identity", aes(fill = Town,)) +
+  scale_y_continuous(labels = function(x) scales::comma(x, suffix = ' Mbps')) +
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Average download speed by district",
+       subtitle = "in the Greater Manchester",
+       caption = "Mbps: Megabits per second") +
+  scale_fill_viridis_d(begin = 0.4,end=1, option = "A") +
+  myTheme
+
+Bandwidth %>%
+  select(Postcode, AvgDownload, AvgUpload) %>%
+  inner_join(HousePrices, by="Postcode") %>%
+  group_by(District, County) %>%
+  summarise(Down = mean(AvgDownload, na.rm=T)) %>%
+  arrange(County) %>%
+  ggplot(mapping = aes(x=County,y=Down,fill=County)) +
+  geom_boxplot() +  scale_y_continuous(labels = function(x) scales::comma(x, suffix = '  \nMbps')) +
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Average download speed by district",
+       subtitle = "in Greater manchester and merseyside",
+       caption = "Mbps: Megabits per second") +
+  scale_color_viridis_d(begin = 0.25,end=0.45, option = "inferno") +
+  myTheme
+
+# CRIME ----
+
+Crime %>% filter(Type=="Drugs" & Department!="Merseyside Police") %>%
+  ggplot(aes(x=Type, y= Date, fill=Type))+
+  geom_boxplot(outlier.colour = "#fa7a43") +
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="Box plot of Drug offence in mid 2019",
+       subtitle = "in Greater Manchester") +
+  scale_fill_viridis_d(begin = 0.5,end=0.8, option = "A") +
+  myTheme
+
+Crime %>% filter(Type=="Drugs" ) %>%
+  group_by(Date, Department) %>%
+  ggplot(aes(x=Type, y= Date, fill=Department))+
+  geom_boxplot(outlier.colour = "#fa7a43") +
+  dark_mode(theme_fivethirtyeight()) + coord_flip()+
+  labs(title="Box plot of Drug offence in 2019-2022(mid)",
+       subtitle = "in Greater Manchester & Merseyside") +
+  scale_fill_viridis_d(begin = 0.5,end=0.8, option = "A") +
+  myTheme
