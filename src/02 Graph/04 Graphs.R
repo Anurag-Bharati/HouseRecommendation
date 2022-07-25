@@ -169,6 +169,49 @@ Crime %>% filter(Type=="Drugs" ) %>%
   scale_fill_viridis_d(begin = 0.5,end=0.8, option = "A") +
   myTheme
 
+# Line graph
+CrimeTypeCount %>%
+  group_by(Date,District, Ward) %>% filter(County == "Merseyside") %>% filter(District == "Liverpool") %>%
+  summarise(`Crime Count` = sum(Drugs, na.rm=T)) %>% filter(`Crime Count`>1) %>%
+  ggplot(mapping = aes(x=Date, y=`Crime Count`, color=Ward)) +
+  geom_line(size=1, alpha=0.8, arrow=arrow(type = "closed",length = unit(0.2, "cm")),lineend = "round", show.legend = F) +
+  dark_mode(theme_fivethirtyeight()) + scale_y_log10() +
+  facet_wrap(~ Ward) +
+  labs(title="No. of Drugs crime cases from 2019-2022(mid)",
+       subtitle = "in Liverpool, Merseyside",
+       caption = "*count in logarithmic scale") +
+  scale_color_viridis_d(begin = 0.4,end=0.6, option = "turbo") +
+  myTheme
+
+CrimeTypeCount %>% filter(str_to_lower(County)=="merseyside") %>%
+  select(-LSOA, -LLSOA, -Ward, -PCD, -County) %>%
+  rename_with(~ str_c('c', 3:16), 3:16) %>%
+  group_by(Date,District) %>%
+  summarise_all(sum) %>% rowwise() %>%
+  transmute(total = sum(c(c3,c4,c5,c6,c7,c8,c9,c10, c11, c12, c13,c14,c15,c16)),District) %>% ungroup() %>%
+  ggplot(mapping = aes(x=Date, y=total, color=District)) +
+  geom_line(size=1, alpha=0.8, arrow=arrow(type = "closed",length = unit(0.2, "cm")),lineend = "round", show.legend = F) +
+  dark_mode(theme_fivethirtyeight()) +
+  facet_wrap(~ District) +
+  labs(title="No. of crime cases from 2019-2022(mid)",
+       subtitle = "inside Merseyside County") +
+  scale_color_viridis_d(begin = 0.4,end=1, option = "magma") +
+  myTheme
+
+CrimeTypeCount %>% filter(Ward %in% c("Prescot North","Prescot South","Wallasey")) %>%
+  select(-LSOA, -LLSOA, -District, -PCD, -County ) %>%
+  rename_with(~ str_c('c', 3:16), 3:16) %>%
+  group_by(Date,Ward) %>%
+  summarise_all(sum) %>% rowwise() %>%
+  transmute(total = sum(c(c3,c4,c5,c6,c7,c8,c9,c10, c11, c12, c13,c14,c15,c16)),Ward) %>% ungroup() %>%
+  ggplot(mapping = aes(x=Date, y=total, color=Ward)) +
+  geom_line(size=1.5, alpha=0.8, arrow=arrow(type = "closed",length = unit(0.2, "cm")),lineend = "round", show.legend = T) +
+  dark_mode(theme_fivethirtyeight()) +
+  labs(title="No. of crime cases from 2019-2022(mid)",
+       subtitle = "in Towns in Merseyside") +
+  scale_color_viridis_d(begin = 0.4,end=1, option = "magma") +
+  myTheme
+
 # SCHOOL ----
 
 # BOX PLOT
