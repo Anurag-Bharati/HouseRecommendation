@@ -70,3 +70,56 @@ CrimeMerRatio = CrimeMerObs/(CrimeManObs+CrimeMerObs)
   
 # Check if valid
 sum(PreCrimeScore[,2:4]) == sum(Crime[,2:ncol(Crime)])
+
+# Bandwidth
+PostBandwidth <- CleanBandwidth %>%
+  group_by(PostcodePrefix) %>%
+  summarise(Download = mean(AvgDownload))
+
+Bandwidth <- PostBandwidth %>%
+  mutate(BandwidthScore = round((Download-min(PostBandwidth$Download))/(max(PostBandwidth$Download)-min(PostBandwidth$Download)) * 10, 2)) %>%
+  mutate(BandwidthScore = ifelse(BandwidthScore<0.01, 0.01, BandwidthScore))
+
+# School
+PostSchool <- CleanSchool %>%
+  separate(Postcode, into=c("PostcodePrefix", "S")) %>%
+  select(PostcodePrefix, Score) %>%
+  group_by(PostcodePrefix) %>%
+  summarise(SchoolScore = mean(Score))
+
+School <- PostSchool %>%
+  mutate(SchoolNScore = round((SchoolScore-min(PostSchool$SchoolScore))/(max(PostSchool$SchoolScore)-min(PostSchool$SchoolScore)) * 10, 2))
+
+PostFlood <- CleanFloodRisk %>%
+  group_by(PostcodePrefix) %>%
+  summarise(FloodScore = mean(avgOdd))
+
+# Flood Risk
+Flood <- PostFlood %>%
+  mutate(FloodNScore = round(10 - (FloodScore-min(PostFlood$FloodScore))/(max(PostFlood$FloodScore)-min(PostFlood$FloodScore)) * 10, 2))
+
+# House Price
+HP <- CleanHousePrice %>%
+  group_by(PostcodePrefix, District, County) %>%
+  summarise(Price = mean(Price)) %>% ungroup() %>%
+  mutate(County=str_to_title(County))
+
+HPS = HP %>%
+  mutate(PriceScore = round(10 - (Price-min(HP$Price))/(max(HP$Price)-min(HP$Price)) * 10, 2))
+
+Rank = HPS %>%
+  left_join(CrimeScore , by=c("PostcodePrefix"="PostcodePrefix", "District"="District", "County"="County")) %>%
+  left_join(Bandwidth, by=c("PostcodePrefix"="PostcodePrefix")) %>%
+  left_join(School, by=c("PostcodePrefix"="PostcodePrefix")) %>%
+  left_join(Flood, by=c("PostcodePrefix"="PostcodePrefix")) %>%
+  mutate(CrimeScore = ifelse(County=="Greater Manchester", CrimeScore/1.5, CrimeScore)) %>%  # Adjusting, Since data of crime in Manchester was from 2019 only
+  rowwise() %>%
+  mutate(OverallScore = mean(c(BandwidthScore,SchoolNScore, PriceScore, CrimeScore, FloodNScore), na.rm=T))
+
+RankScoreOnly = Rank %>%
+  select( -Price, -SchoolScore, -Download, -FloodScore, -District, -PostcodePrefix) %>%
+  na.omit() %>% group_by(Town,County) %>%
+  summarise_all(mean) %>% filter(!(Town=="Wigan" & County=="Merseyside")) %>%  ungroup() %>%
+  arrange(desc(OverallScore)) %>%
+  mutate(Rank = row_number()) %>%
+  select(Rank,Town,County, everything())

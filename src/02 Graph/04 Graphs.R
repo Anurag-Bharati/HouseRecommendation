@@ -18,7 +18,6 @@ myTheme <- theme(
   legend.background =  element_rect(fill = "grey7"),
 )
   
-  
 # HOUSE PRICE ----
 # Good article I Found https://www.statology.org/when-to-use-mean-vs-median/
 HousePrices %>% group_by(Date, County) %>% 
@@ -288,5 +287,3 @@ School %>% filter(District %in% c("Liverpool", "Manchester")) %>%
        subtitle = "from 2016 to 2019") +
   scale_color_viridis_d(begin = 0.3,end=0.7, option = "turbo") +
   myTheme
-
-# TODO Radar chart
