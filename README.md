@@ -29,6 +29,7 @@ You may need to install these dependencies in order to run the code.
 3. Run src/00 Setup/00 Setup.R
 4. Run src/00 Setup/00 Functions.R
 5. Run all file consecutively inside src/01 Cleaning
+6. You may run any other afterwards. :)
 
 ### Folder Structure
 ```
