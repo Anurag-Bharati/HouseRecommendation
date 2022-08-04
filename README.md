@@ -1,6 +1,5 @@
 ## HouseRecommendation
 [![size][size-shield]][size-url]
-[![Forks][forks-shield]][forks-url]
 [![LastCommit][lastCommit-shield]][size-url]
 ![SearchHit][hits-shield]
 [![Facebook][facebook-shield]][facebook-url]
@@ -69,8 +68,6 @@ License (PDL).
 <!--- IGNORE THESE ---->
 [size-shield]:https://img.shields.io/github/repo-size/Anurag-Bharati/HouseRecommendation?style=for-the-badge
 [size-url]: https://github.com/Anurag-Bharati/Park-And-Pee
-[forks-shield]: https://img.shields.io/github/forks/Anurag-Bharati/HouseRecommendation?style=for-the-badge
-[forks-url]: https://github.com/Anurag-Bharati/HouseRecommendation/network/members
 [size-shield]:https://img.shields.io/github/repo-size/anurag-bharati/HouseRecommendation?style=for-the-badge
 [size-url]: https://github.com/Anurag-Bharati/HouseRecommendation
 [lastCommit-shield]:https://img.shields.io/github/last-commit/anurag-bharati/HouseRecommendation?style=for-the-badge
