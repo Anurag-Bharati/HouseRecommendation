@@ -61,12 +61,12 @@ CrimeScore = PostCrimeScore %>% filter(!is.na(Town)) %>%
   select(PostcodePrefix,CrimeScore = Score, everything())
 
 # Since data of crime in Manchester was from 2019 only
-crime_manchester %>% select(Month) %>% mutate(Month = substr(Month,1,4)) %>%  distinct %>% count
-crime_merseyside  %>% select(Month) %>% mutate(Month = substr(Month,1,4)) %>%  distinct %>% count
+#crime_manchester %>% select(Month) %>% mutate(Month = substr(Month,1,4)) %>%  distinct %>% count
+#crime_merseyside  %>% select(Month) %>% mutate(Month = substr(Month,1,4)) %>%  distinct %>% count
 # Factor = 1/4 = ~0.25
 
-CrimeManRatio = CrimeManObs/(CrimeManObs+CrimeMerObs)
-CrimeMerRatio = CrimeMerObs/(CrimeManObs+CrimeMerObs)
+# CrimeManRatio = CrimeManObs/(CrimeManObs+CrimeMerObs)
+# CrimeMerRatio = CrimeMerObs/(CrimeManObs+CrimeMerObs)
   
 # Check if valid
 sum(PreCrimeScore[,2:4]) == sum(Crime[,2:ncol(Crime)])

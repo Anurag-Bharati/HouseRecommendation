@@ -184,10 +184,10 @@ CrimeTypeCount %>%
 
 CrimeTypeCount %>% filter(str_to_lower(County)=="merseyside") %>%
   select(-LSOA, -LLSOA, -Ward, -PCD, -County) %>%
-  rename_with(~ str_c('c', 3:16), 3:16) %>%
+  rename_with(~ str_c('c', 3:16), 3:16) %>% 
   group_by(Date,District) %>%
-  summarise_all(sum) %>% rowwise() %>%
-  transmute(total = sum(c(c3,c4,c5,c6,c7,c8,c9,c10, c11, c12, c13,c14,c15,c16)),District) %>% ungroup() %>%
+  summarise_all(sum) %>% rowwise() %>% 
+  transmute(total = sum(c(c3,c4,c5,c6,c7,c8,c9,c10, c11, c12, c13,c14,c15,c16)),District) %>% ungroup() %>% 
   ggplot(mapping = aes(x=Date, y=total, color=District)) +
   geom_line(size=1, alpha=0.8, arrow=arrow(type = "closed",length = unit(0.2, "cm")),lineend = "round", show.legend = F) +
   dark_mode(theme_fivethirtyeight()) +
@@ -276,7 +276,7 @@ School %>%
   scale_color_viridis_d(begin = 0.3,end=0.7, option = "turbo") +
   myTheme
 
-School %>% filter(District %in% c("Liverpool", "Manchester")) %>%
+School %>% filter(District %in% c("Liverpool", "Manchester")) %>% 
   group_by(Year,TOWN) %>%
   summarise(Score = mean(Score)) %>%
   ggplot(mapping = aes(x=Year, y=Score, color=TOWN)) + facet_wrap(~TOWN, nrow=1)+

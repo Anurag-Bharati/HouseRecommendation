@@ -45,10 +45,10 @@ CountBeforeOmit == nrow(Crime)
 # Output : True
 # A -> 561731 (ideal)
 
-naCols(Crime)
+# naCols(Crime)
 # Outcome: Max missing values per variable percentage is 0%
 # Action: No action needed
-naRows(Crime)
+# naRows(Crime)
 # Outcome: Missing values per observation percentage is 0%
 # Action:  No action needed
 
