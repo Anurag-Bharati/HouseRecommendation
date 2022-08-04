@@ -29,12 +29,13 @@ You may need to install these dependencies in order to run the code.
 
 ### Instructions
 
-1. Extract data inside the main project folder
+1. Extract zip data inside the main project folder
 2. Open the Coursework.Rproj file in RStudio
-3. Run src/00 Setup/00 Setup.R
-4. Run src/00 Setup/00 Functions.R
-5. Run all file consecutively inside src/01 Cleaning
-6. You may run any other afterwards. :)
+3. Install dependencies mentioned <a href="#dependencies">above</a>
+4. Run src/00 Setup/00 Setup.R
+5. Run src/00 Setup/00 Functions.R
+6. Run all file consecutively inside src/01 Cleaning
+7. You may run any other afterwards. :)
 
 ### Folder Structure
 ```
@@ -55,9 +56,40 @@ You may need to install these dependencies in order to run the code.
 ```    
 
 ### Download
->ℹ NOTE: The data set is highly compressed and decompression may take time
 
 [CLICK HERE](https://drive.google.com/file/d/1kRCReWPzumwDvF_0CjbLo4wFVitGrPvY/view?usp=sharing) TO DOWNLOAD ALL THE DATASETS USED
+
+>ℹ NOTE: The data set is highly compressed and decompression may take time
+
+### Used Datasets Info
+Dataset used or considered for this project
+<details><summary>SHOW ME!</summary>
+    
+#### Core datasets
+- [x] Houseprice (2019-2020)
+- [x] Population (2011)
+- [x] Crime (2019-2022)
+- [x] School (2016-2019)
+- [x] Broadband (2018)
+- [x] Flood Risk (2017)
+- [ ] Tax (2020)
+- [ ] Noise level
+- [ ] Air quality
+    
+#### Helper datasets
+- [x] Geocode conversion (by Doogle)
+- [x] Relevent PCDS (custom made)
+- [x] PostalCodeToDistrictManchester (custom made)
+- [x] PostalCodeToDistrictMerseyside (custom made)
+- [x] Postal Area to Names (custom made)
+- [x] PostcodeLSOA (by Uk geo gov)
+- [x] Population growth rate UK
+- [ ] North West PCD UK
+- [ ] Uk Population (2020)
+ 
+> The tick signifies that the data set is in use
+ 
+</details>
 
 ### Datasets License Information ⚖
 Many core datasets, such as crime, housing price, school, flood risk, and geo-code conversion, are 
