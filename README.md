@@ -1,15 +1,21 @@
 ## HouseRecommendation
->Year II Sem II Data Science Assignment
+[![size][size-shield]][size-url]
+[![Forks][forks-shield]][forks-url]
+[![LastCommit][lastCommit-shield]][size-url]
+![SearchHit][hits-shield]
+[![Facebook][facebook-shield]][facebook-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-A basic house recommendation project. 
+A basic house recommendation project for module **ST5014CEM Data Science For Developers**. 
+>Year II Sem II Data Science Assignment
 
 ### Prerequisite
 These are some main components required to run the project
 1. The <a href="#download">Dataset</a>
-2. 7zip file archiver
+2. [7zip](https://www.7-zip.org/download.html) file archiver
 3. RAM > 500MB for unzipping
-4. R and RStudio
-
+4. [R](https://cran.r-project.org/bin/) and [RStudio](https://www.rstudio.com/products/rstudio/download/)
+> Note: To download more ram [click here](https://downloadmoreram.com/)
 ### Dependencies
 You may need to install these dependencies in order to run the code.
 ```R
@@ -59,6 +65,20 @@ Many core datasets, such as crime, housing price, school, flood risk, and geo-co
 provided under Open Government License. The bandwidth dataset is provided under the Ofcom 
 license, and some helper data, such as Geocode and PGR, are provided under Public Domain 
 License (PDL).
+
+<!--- IGNORE THESE ---->
+[size-shield]:https://img.shields.io/github/repo-size/Anurag-Bharati/HouseRecommendation?style=for-the-badge
+[size-url]: https://github.com/Anurag-Bharati/Park-And-Pee
+[forks-shield]: https://img.shields.io/github/forks/Anurag-Bharati/HouseRecommendation?style=for-the-badge
+[forks-url]: https://github.com/Anurag-Bharati/HouseRecommendation/network/members
+[size-shield]:https://img.shields.io/github/repo-size/anurag-bharati/HouseRecommendation?style=for-the-badge
+[size-url]: https://github.com/Anurag-Bharati/HouseRecommendation
+[lastCommit-shield]:https://img.shields.io/github/last-commit/anurag-bharati/HouseRecommendation?style=for-the-badge
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/anurag-bharati-5abb6820a/
+[facebook-shield]:https://img.shields.io/badge/Facebook-Anurag-blue?style=for-the-badge
+[facebook-url]:https://www.facebook.com/frost.king.1042
+[hits-shield]:https://img.shields.io/github/search/anurag-bharati/HouseRecommendation/all?color=green&label=repo%20hits&style=for-the-badge
 
 
 
