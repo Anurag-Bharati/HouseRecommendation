@@ -57,6 +57,7 @@ LeftOutTown <- PostCrimeScore %>% filter(is.na(Town)) %>%
 
 CrimeScore = PostCrimeScore %>% filter(!is.na(Town)) %>% 
   ungroup() %>% 
+  add_row(LeftOutTown) %>% 
   mutate(Town = as.factor(Town), District = as.factor(District)) %>% 
   select(PostcodePrefix,CrimeScore = Score, everything())
 
