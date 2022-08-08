@@ -33,7 +33,7 @@ You may need to install these dependencies in order to run the code.
 2. Open the Coursework.Rproj file in RStudio
 3. Install dependencies mentioned <a href="#dependencies">above</a>
 4. Run src/00 Setup/00 Setup.R
-5. Run src/00 Setup/00 Functions.R
+5. Run src/00 Setup/01 Functions.R
 6. Run all file consecutively inside src/01 Cleaning
 7. You may run any other afterwards. :)
 
@@ -99,7 +99,7 @@ License (PDL).
 
 <!--- IGNORE THESE ---->
 [size-shield]:https://img.shields.io/github/repo-size/Anurag-Bharati/HouseRecommendation?style=for-the-badge
-[size-url]: https://github.com/Anurag-Bharati/Park-And-Pee
+[size-url]: https://github.com/Anurag-Bharati/HouseRecommendation
 [size-shield]:https://img.shields.io/github/repo-size/anurag-bharati/HouseRecommendation?style=for-the-badge
 [size-url]: https://github.com/Anurag-Bharati/HouseRecommendation
 [lastCommit-shield]:https://img.shields.io/github/last-commit/anurag-bharati/HouseRecommendation?style=for-the-badge
